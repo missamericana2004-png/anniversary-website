@@ -1,0 +1,1308 @@
+/* Basic Reset and Full Screen Setup */
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    /* Changed from hidden to auto to support scrolling content inside the viewport */
+    overflow: auto; 
+    font-family: sans-serif;
+}
+
+.envelope-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    background-color: #1a1847; 
+    position: relative;
+}
+
+/* ------------------ ENVELOPE STYLES (FULL SCREEN) ------------------ */
+
+.envelope {
+    width: 100vw; 
+    height: 100vh;
+    position: absolute;
+    top: 0; 
+    left: 0;
+    z-index: 100; 
+    /* IMPORTANT: Transition transform, and hide completely after 1s */
+    transition: transform 1s ease-in-out, opacity 0.1s 1.5s, visibility 0s 1.5s; 
+    perspective: 1000px; 
+}
+
+.body {
+    background-color: #14123e; /* midnight indigo base */
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 1;
+
+    /* Elegant soft lavender heart pattern */
+    background-image: url("data:image/svg+xml;utf8,\
+    <svg xmlns='http://www.w3.org/2000/svg' width='90' height='90' viewBox='0 0 90 90'>\
+      <path d='M45 38 C43 33,35 33,35 40 C35 45,45 52,45 52 C45 52,55 45,55 40 C55 33,47 33,45 38 Z' fill='%23e3d7ff' stroke='%23b6a7f7' stroke-width='1.3'/>\
+    </svg>");
+    background-repeat: repeat;
+    background-size: 95px 95px;
+    background-position: center;
+    background-blend-mode: lighten;
+}
+
+
+
+/* Common properties for flaps, using the IDs for unique directions */
+#topFlap, #bottomFlap {
+    position: absolute;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-left: 50vw solid transparent; 
+    border-right: 50vw solid transparent;
+    
+    background-image: radial-gradient(circle at 50% 50%, #fcebeb 2px, transparent 3px), radial-gradient(circle at 25% 25%, #e6b2b2 2px, transparent 3px), radial-gradient(circle at 75% 25%, #e6b2b2 2px, transparent 3px), radial-gradient(circle at 25% 75%, #e6b2b2 2px, transparent 3px), radial-gradient(circle at 75% 75%, #e6b2b2 2px, transparent 3px);
+    background-size: 50px 50px;
+    background-repeat: repeat;
+    background-color: transparent; 
+
+    z-index: 3; 
+    transition: transform 1s ease-in-out;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1); 
+    border-left-color: rgba(194, 120, 120, 0.1);
+    border-right-color: rgba(194, 120, 120, 0.1);
+}
+
+
+
+
+/* Top and bottom flaps — elegant midnight lavender theme */
+#topFlap {
+    position: absolute;
+    top: -1px; 
+    left: 0;
+    width: 0;
+    height: 0;
+    border-left: 50vw solid transparent; 
+    border-right: 50vw solid transparent;
+    border-top: 50vh solid transparent; 
+    transform-origin: top; 
+    z-index: 3;
+
+    /* Lavender heart pattern */
+    background-image: url("data:image/svg+xml;utf8,\
+    <svg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'>\
+      <path d='M40 34 C38 30,32 30,32 36 C32 41,40 47,40 47 C40 47,48 41,48 36 C48 30,42 30,40 34 Z' fill='%23e6dbff' stroke='%23b6a7f7' stroke-width='1'/>\
+    </svg>");
+    background-repeat: repeat;
+    background-size: 70px 70px;
+    background-color: #1a1645; 
+    background-blend-mode: lighten;
+    transition: transform 1s ease-in-out;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
+}
+
+/* Bottom flap */
+#bottomFlap {
+    position: absolute;
+    bottom: 0; 
+    left: 0;
+    width: 0;
+    height: 0;
+    border-left: 50vw solid transparent; 
+    border-right: 50vw solid transparent;
+    border-bottom: 50vh solid transparent;
+    transform-origin: bottom; 
+    z-index: 2;
+    box-shadow: 0 -5px 12px rgba(0, 0, 0, 0.35);
+
+    /* Matching heart pattern */
+    background-image: url("data:image/svg+xml;utf8,\
+    <svg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'>\
+      <path d='M40 34 C38 30,32 30,32 36 C32 41,40 47,40 47 C40 47,48 41,48 36 C48 30,42 30,40 34 Z' fill='%23e6dbff' stroke='%23b6a7f7' stroke-width='1'/>\
+    </svg>");
+    background-repeat: repeat;
+    background-size: 70px 70px;
+    background-color: #1a1645;
+    background-blend-mode: lighten;
+}
+
+
+/* ------------------ SEAL/BUTTON STYLES ------------------ */
+
+/* ------------------ SEAL/BUTTON STYLES ------------------ */
+.seal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 180px;
+    height: 160px;
+    background: linear-gradient(145deg, #f3baff, #f9d9ff); /* pinkish lavender gradient */
+    clip-path: polygon(
+        50% 85%, 
+        20% 55%, 
+        10% 35%, 
+        15% 20%, 
+        30% 15%, 
+        45% 25%, 
+        50% 35%, 
+        55% 25%, 
+        70% 15%, 
+        85% 20%, 
+        90% 35%, 
+        80% 55%
+    );
+    z-index: 5;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    box-shadow:
+        0 0 50px rgba(240, 200, 255, 0.6),
+        0 0 100px rgba(230, 180, 255, 0.4),
+        inset 5px 5px 15px rgba(255, 255, 255, 0.6),
+        inset -5px -5px 15px rgba(160, 120, 200, 0.25);
+    animation: heartbeat 1.4s infinite ease-in-out;
+    transition: all 0.3s ease;
+    border-radius: 15px; /* softens sharp edges subtly */
+}
+
+/* Hover glow */
+.seal:hover {
+    background: linear-gradient(145deg, #f8d5ff, #fbe7ff);
+    box-shadow:
+        0 0 70px rgba(250, 220, 255, 0.8),
+        0 0 130px rgba(240, 200, 255, 0.6),
+        inset 5px 5px 20px rgba(255, 255, 255, 0.7),
+        inset -5px -5px 20px rgba(180, 140, 220, 0.3);
+}
+
+/* Heartbeat animation */
+@keyframes heartbeat {
+    0%, 100% {
+        transform: translate(-50%, -50%) scale(1);
+    }
+    25% {
+        transform: translate(-50%, -50%) scale(1.15);
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1);
+    }
+    75% {
+        transform: translate(-50%, -50%) scale(1.1);
+    }
+}
+
+
+/* ------------------ HEART ICON ------------------ */
+.heart-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-45deg);
+    width: 3vmin;
+    height: 3vmin;
+    background-color: #1A164D; /* midnight indigo tone */
+    opacity: 0;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    box-shadow: 0 0 20px rgba(160, 140, 255, 0.5); /* soft lavender glow */
+}
+
+.heart-icon::before,
+.heart-icon::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #1A164D; /* match main heart */
+    border-radius: 50%;
+}
+
+.heart-icon::before {
+    top: -50%;
+    left: 0;
+}
+
+.heart-icon::after {
+    left: 50%;
+    top: 0;
+}
+
+/* Gentle glow on hover */
+.seal:hover .heart-icon {
+    opacity: 1;
+    transform: translate(-50%, -50%) rotate(-45deg) scale(1.2);
+    box-shadow: 0 0 35px rgba(182, 169, 255, 0.7); /* soft bluish lavender glow */
+}
+
+
+/* ------------------ WEBSITE CONTENT PAGES (The Framed Card) ------------------ */
+.website-content {
+    width: calc(100vw - 20px);
+    height: calc(100vh - 20px);
+    position: absolute;
+    top: 10px;
+    left: 10px;
+
+    background-color: #eee8ff; /* soft lavender-cream base */
+    border-radius: 16px;
+    border: 10px solid #504192; /* muted lavender border to match theme */
+    box-sizing: border-box;
+
+    opacity: 0;
+    z-index: 99;
+    transition: opacity 1s ease 0.5s;
+
+    /* Soft textured pattern with midnight hints */
+    background-image: 
+        radial-gradient(circle at 10% 10%, rgba(155, 139, 255, 0.15) 1px, transparent 1px),
+        radial-gradient(circle at 90% 90%, rgba(20, 18, 62, 0.2) 1px, transparent 1px);
+    background-size: 140px 140px;
+    background-repeat: repeat;
+
+    box-shadow: 
+        0 0 40px rgba(20, 18, 62, 0.3),
+        inset 0 0 25px rgba(182, 167, 247, 0.2);
+}
+
+
+.page-section {
+    width: 100%;
+    height: 100%; 
+    padding: 40px;
+    box-sizing: border-box;
+    display: none; 
+    overflow-y: auto; 
+    text-align: center;
+}
+
+.page-section.active {
+    display: flex; /* Changed from 'block' to 'flex' */
+    flex-direction: column; /* Stacks content */
+    justify-content: center; /* Centers content vertically */
+    align-items: center; /* Centers content horizontally */
+}
+
+/* ------------------ HOME PAGE STYLING (CALENDAR) ------------------ */
+
+.page-section#home {
+    padding: 40px; /* Increased padding for better separation */
+    display: block; /* Changed from flex to block to allow content to flow and scroll */
+    
+    max-width: none; 
+    margin: 0 auto;
+    overflow-y: auto; /* IMPORTANT: Enables vertical scrolling for overflow content */
+    height: 100%; /* Ensures section takes full height of the website-content for scrolling to work */
+    flex-direction: row; /* Arranges the two main elements (calendar & text) horizontally */
+    flex-wrap: wrap; /* Allows wrap on small screens */
+    align-items: flex-start; /* Aligns content to the top */
+    justify-content: center;
+    padding: 40px;
+}
+
+/* ------------------ CALENDAR STYLING (SMALL SIZE) ------------------ */
+
+.calendar-month {
+    font-family: 'Cursive', serif;
+    font-size: 1.8em;
+    color: #1A164D;
+    margin-bottom: 15px; 
+    border-bottom: 2px solid #1A164D;
+    padding-bottom: 5px; 
+    display: inline-block;
+}
+
+.calendar-card {
+    background: linear-gradient(160deg, #fbfaff, #f5f2ff); /* pale lavender ivory */
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 6px 25px rgba(150, 130, 200, 0.25); /* soft violet shadow */
+    
+    max-width: 420px;
+    width: 90%;
+    min-height: 42vh;
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 0 auto 40px auto;
+    border: 2px solid rgba(180, 165, 225, 0.3); /* faint lavender border */
+}
+
+
+.calendar-card table {
+    flex-grow: 1; 
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9em; 
+    table-layout: fixed; 
+}
+
+/* New CSS to ensure rows have equal height */
+.calendar-card tbody tr {
+    height: 50px; 
+}
+
+.calendar-card th {
+    color: #1A164D;
+    padding: 8px 0; 
+    font-weight: bold;
+    font-size: 1em; 
+}
+
+.calendar-card td {
+    padding: 8px 0;
+    min-height: 35px;
+    height: 100%;
+    text-align: center;
+    border: 1px solid rgba(182, 167, 247, 0.3); /* soft lavender border */
+    cursor: default;
+    position: relative;
+    color: #2E2A55; /* deep muted lavender-gray for text */
+    background-color: rgba(255, 255, 255, 0.8); /* subtle glow against the bg */
+    transition: background-color 0.3s ease;
+}
+
+.calendar-card td:hover {
+    background-color: rgba(182, 167, 247, 0.2); /* gentle lavender highlight on hover */
+}
+
+
+.calendar-card td:hover:not(.empty-day) {
+    background-color: #AFA2F2; /* soft glowing lavender */
+    color: #fff; /* white text for contrast */
+    font-weight: 600;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+
+
+.calendar-card .empty-day {
+    background-color: #f8f6fe; /* same as calendar background */
+    border: 1px solid #f8f6fe; /* invisible border for smooth edges */
+}
+
+
+/* Style for 5th November (Heart cell) */
+.calendar-card .special-day {
+    background-color: #d8cff9; /* soft lavender highlight */
+    font-weight: bold;
+    color: #1A164D; /* deep midnight text/heart */
+    position: relative;
+    transform: scale(1.08);
+    transition: transform 0.25s ease;
+    
+    font-size: 1.4em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px; /* smooth corners for elegance */
+}
+.calendar-card .special-day:hover {
+    background-color: #c9baf7; /* slightly richer lavender glow on hover */
+    transform: scale(1.15);
+}
+
+
+/* Styling for the caption */
+.calendar-caption {
+    font-family: 'Cursive', 'Times New Roman', serif;
+    font-size: 1.2em; 
+    color: #1A164D;
+    margin-top: 15px; 
+}
+
+/* ------------------ NEW TEXT STYLING ------------------ */
+.additional-info {
+    max-width: 600px;
+    margin: 0 auto 40px auto;
+    padding: 20px;
+    text-align: center;
+    border-top: 1px dashed #cdb2e6;
+    margin-top: 20px;
+}
+
+.secondary-title {
+    font-family: 'Playfair Display', serif; /* elegant + bold heading style */
+    font-size: 2.2em;
+    color: #1A164D;
+    font-weight: 700;
+    letter-spacing: 0.5px; /* subtle spacing for a refined header feel */
+}
+
+.additional-info p {
+    font-size: 1em;
+    line-height: 1.7;
+    color: #2E2A5E; /* soft muted navy-lavender tone for harmony */
+    margin-bottom: 15px;
+    font-family: 'Poppins', sans-serif; /* cleaner and more modern readability */
+}
+
+
+.signature {
+    font-family: 'Dancing Script', cursive; 
+    font-size: 1.6em;
+    color: #4B3B9A; /* deep lavender with warmth */
+    margin-top: 30px;
+    letter-spacing: 0.5px;
+}
+
+
+/* ------------------ HEART DECORATION STYLING ------------------ */
+.bouquet-decoration {
+    width: 100%;
+    position: relative;
+    text-align: center;
+    margin-top: 40px;
+    margin-bottom: 25px;
+    background: radial-gradient(circle at center, rgba(230, 220, 255, 0.3) 0%, transparent 70%);
+    padding: 10px 0;
+}
+
+
+
+.end-heart {
+    font-size: 3em;
+    color: #b88bff; /* Soft lavender tone */
+    display: inline-block;
+    animation: pulse 1.5s infinite alternate ease-in-out;
+    text-shadow: 0 0 10px rgba(184, 139, 255, 0.6),
+                 0 0 20px rgba(184, 139, 255, 0.4);
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); opacity: 0.9; }
+    100% { transform: scale(1.15); opacity: 1; }
+}
+
+
+
+
+
+/* Define the subtle pulse animation */
+@keyframes pulse {
+    from { transform: scale(1); opacity: 0.9; }
+    to { transform: scale(1.05); opacity: 1; }
+}
+
+/* ------------------ OTHER PAGE STYLING (SIMPLIFIED) ------------------ */
+
+#about, #portfolio, #contact {
+    text-align: center;
+    padding-top: 50px;
+}
+
+#about h2, #portfolio h2, #contact h2 {
+    font-family: 'Playfair Display', serif; /* more elegant and readable than generic cursive */
+    font-size: 2.3em;
+    color: #3C2A7D; /* deep lavender-midnight tone for rich contrast */
+    margin-bottom: 30px;
+    border-bottom: 2px solid rgba(182, 167, 247, 0.8); /* soft lavender underline */
+    display: inline-block;
+    padding-bottom: 5px;
+    letter-spacing: 0.5px;
+}
+
+
+#about p, #portfolio p, #contact p {
+    font-size: 1.1em;
+    line-height: 1.7;
+    color: #3E3569; /* soft muted lavender-gray for harmony with the theme */
+    max-width: 80%;
+    margin: 0 auto 20px auto;
+    letter-spacing: 0.3px;
+}
+
+
+.heart-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    font-size: 50px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform 0.3s ease, color 0.3s ease, text-shadow 0.3s ease;
+    color: #a691ff; /* soft lavender tone */
+    text-shadow: 0 0 15px rgba(166, 145, 255, 0.6);
+}
+
+.heart-btn:hover {
+    transform: scale(1.2);
+    color: #c7b7ff; /* lighter lavender for hover */
+    text-shadow: 0 0 25px rgba(199, 183, 255, 0.8);
+}
+
+
+ .second-heart {
+    position: relative;
+    display: inline-block;
+    font-size: 3em;
+    cursor: pointer;
+    color: #a691ff; /* soft lavender hue */
+    text-shadow: 0 0 15px rgba(166, 145, 255, 0.6);
+    transition: transform 0.3s ease, color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.second-heart:hover {
+    transform: scale(1.15);
+    color: #c7b7ff; /* lighter lavender glow on hover */
+    text-shadow: 0 0 25px rgba(199, 183, 255, 0.8);
+}
+
+
+.second-heart-text {
+    position: absolute;
+    bottom: 120%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(230, 225, 255, 0.9); /* soft lavender backdrop */
+    color: #1A164D; /* midnight indigo text */
+    padding: 6px 12px;
+    border-radius: 10px;
+    white-space: nowrap;
+    font-family: 'Poppins', serif;
+    font-size: 0.7em;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 3px 8px rgba(26, 22, 77, 0.25); /* subtle lavender glow */
+}
+
+
+.second-heart:hover .second-heart-text {
+    opacity: 1;
+    transform: translateX(-50%) translateY(-5px); /* Slight pop-up effect */
+}
+
+/* --------------------Third page lavender background --------------------*/
+/* THIRD LAVENDER PAGE */
+#third {
+  background: linear-gradient(135deg, #f9e4ea 0%, #ede4fa 100%);
+  min-height: 100vh;
+  padding: 40px 20px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+/* Highlighted Text */
+.highlight-text {
+  color: #402654; /* Soft lavender-rose shade that complements both tones */
+  font-size: 1.2em;
+  font-family: 'Cursive', 'Times New Roman', serif;
+  font-weight: 500;
+  font-style: italic;
+  text-align: center;
+  max-width: 80%;
+}
+
+
+#third {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #E6E6FA;
+    z-index: 90;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 40px;
+    overflow-y: auto;
+    text-align: center;
+}
+
+#third.active {
+    display: flex;
+    background: linear-gradient(135deg, #f7e9ef 0%, #ede7fa 100%);
+}
+
+
+.polaroid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 200px); /* exactly 3 columns with fixed width */
+    gap: 20px; /* adjust spacing between polaroids */
+    justify-content: center; /* center the whole grid */
+    margin-top: 20px;
+}
+
+
+
+/* Polaroid flip card */
+.polaroid {
+    width: 200px; /* bigger size */
+    height: 250px;
+    perspective: 1000px;
+}
+
+.polaroid-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+    cursor: pointer;
+}
+
+.polaroid:hover .polaroid-inner {
+    transform: rotateY(180deg);
+}
+
+.polaroid-front, .polaroid-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Cursive', serif;
+    font-size: 1.2em;
+    color: #826497; /* softer, deeper mauve-lavender tone for better blending */
+    box-shadow: 0 4px 15px rgba(81, 40, 146, 0.3); /* subtle lavender-tinted shadow */
+    background-color: #f7edf7; /* soft blush-lavender backdrop */
+}
+
+
+.polaroid-front {
+    background-color: #f6d9ec;
+}
+
+.polaroid-back {
+    transform: rotateY(180deg);
+    background-color: rgb(246, 219, 239);
+}
+
+.polaroid-back img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+/* Polaroid Back Video Styling */
+.polaroid-back video {
+    width: 100%;          /* Fill the polaroid back */
+    height: 100%;         /* Keep same height as polaroid */
+    object-fit: cover;    /* Crop/fit video nicely */
+    border-radius: 10px;  /* Same rounded corners as photos */
+}
+
+
+/* Heart Button hover tooltip for bottom-right heart */
+.heart-btn::after {
+    content: attr(title);
+    position: absolute;
+    bottom: 100%;
+    right: 0;
+    transform: translateY(-10px);
+    background-color: #f4e2ec; /* softer blush-lavender mix */
+    color: #d8c3ff; /* muted mauve-brown for elegance */
+    padding: 6px 12px;
+    border-radius: 8px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    white-space: nowrap;
+    font-family: 'Cursive', serif;
+    font-size: 0.9em;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+}
+
+
+.heart-btn:hover::after {
+    opacity: 1;
+    transform: translateY(-15px);
+}
+
+/* -------------- fourth page click button -------------- */
+
+.next-page-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    justify-content: center; 
+    margin-top: 40px; 
+}
+
+.next-page-caption {
+    font-family: 'Playfair Display', serif; /* classy and timeless */
+    color: #e8bef4;
+    text-align: center;
+    margin-bottom: 15px;
+    font-size: 22px;
+    letter-spacing: 0.5px;
+}
+
+
+.envelope-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 65px; 
+    height: 65px;
+    border: none;
+    border-radius: 14px;
+    background: linear-gradient(145deg, #f1d6e0, #dcd0f0); /* soft blush-lavender blend */
+    cursor: pointer;
+    font-size: 30px;
+    transition: all 0.3s ease;
+    overflow: hidden;
+    margin: 0 auto;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.envelope-btn:hover {
+    transform: scale(1.08);
+    background: linear-gradient(145deg, #e7c6d7, #cfc0ef);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+
+/* Envelope icon inside button */
+.envelope-icon {
+    display: block;
+    margin-left: 0;
+    transition: margin 0.3s ease;
+}
+
+/* Text hidden initially */
+.envelope-text {
+    opacity: 0;
+    white-space: nowrap;
+    font-family: 'Satisfy', cursive; /* more readable but still romantic */
+    color: #6e4a7e; /* soft mauve-lavender shade */
+    font-size: 19px;
+    margin-left: 10px;
+    transition: opacity 0.4s ease, transform 0.3s ease;
+    transform: translateY(4px);
+}
+
+/* Hover effect */
+.envelope-btn:hover {
+    width: auto;
+    padding: 0 18px;
+    border-radius: 30px;
+    background: #f1d4e9; /* blush-pink with lavender undertone */
+}
+
+/* Reveal text smoothly on hover */
+.envelope-btn:hover .envelope-text {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+
+
+/* ------------- FOURTH PAGE POLAROIDS -------------- */
+/* --------------------Fourth Page Memory Game -------------------- */
+#fourth {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #1f193f; /* soft lavender with depth */
+    z-index: 1001;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 40px;
+    overflow-y: auto;
+    text-align: center;
+}
+
+
+#fourth.active {
+    display: flex;            
+}
+
+
+/* 4th page polaroids (click-to-flip) */
+#fourth .polaroid-inner {
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+    cursor: pointer;
+}
+
+#fourth .polaroid-inner.flipped {
+    transform: rotateY(180deg);
+}
+
+#fourth .polaroid-front,
+#fourth .polaroid-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Playfair Display', serif;
+
+    box-shadow: 0 4px 15px rgba(255, 190, 253, 0.784);
+}
+
+#fourth .polaroid-front {
+    background-color: #ffcce0;
+    border-radius: 10px;
+}
+
+#fourth .polaroid-front img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+/* Polaroid Back Full Image with Text Overlay */
+#fourth .polaroid-back {
+    transform: rotateY(180deg);
+    background-color: rgb(0, 0, 0);
+    border-radius: 10px;  /* curved corners for the back card */
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    position: relative;   /* for overlaying text */
+    overflow: hidden;
+}
+
+/* Back image covering whole polaroid with curved corners */
+#fourth .polaroid-back img.memory-img {
+    width: 100%;        /* fill entire back */
+    height: 100%;       /* fill entire back */
+    object-fit: cover;  /* nicely cover without stretching */
+    border-radius: 10px; /* curve corners */
+    display: block;
+}
+
+
+#fourth .polaroid-back {
+    transform: rotateY(180deg);
+    background-color: white;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    position: relative;
+}
+
+#fourth .polaroid-back .memory-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+/* Text overlay on top of image, shows when flipped */
+#fourth .polaroid-back .polaroid-text {
+
+    font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  background: rgba(0, 0, 0, 0.4);
+  padding: 10px 20px;
+  border-radius: 10px;
+  display: inline-block;
+
+    font-size: 1em;
+    color: rgba(255, 255, 255, 0.8); /* white text */
+    text-align: center;
+    width: 90%;              
+    line-height: 1.2em;
+    /* text-shadow: 0 0 5px rgba(0,0,0,0.5); */
+    position: absolute;
+    top: 50%;               
+    left: 50%;              
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: opacity 0.6s ease, transform 0.6s ease;
+    z-index: 2;
+}
+
+/* Show text when flipped */
+#fourth .polaroid-inner.flipped .polaroid-text {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+}
+
+.page-section.active {
+    display: flex; /* <-- THIS IS THE PROBLEM FOR #HOME */
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: center; 
+}
+
+/* -------------------LETTER PAGE (FIFTH PAGE)------------------- */
+
+/* -------------------- Page Container (The full screen) -------------------- */
+#fifth {
+    position: fixed; 
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    
+    /* CRITICAL FIX 1: Add a solid background color to ensure full coverage. */
+    /* This color will cover the calendar/any page underneath. */
+    background-color: #fbc1f7; /* Use a color from your theme (e.g., the envelope body color) */
+    
+    /* Keep your custom background image/size here (Layer 1) */
+    background-image: url('background_letter_images/bg 2.jpg'); /* Changed from 'background' to 'background-image' */
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover; 
+    
+    /* Styling (unchanged) */
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; 
+    padding: 60px 20px;
+    overflow-y: auto;
+    text-align: center;
+    z-index: 1002;
+    font-family: 'Dancing Script', cursive;
+    color: #1A164D;
+}
+
+
+
+.final-message-container {
+    width: 80%;
+    max-width: 900px;
+    margin: 80px auto;
+    padding: 50px;
+    text-align: center;
+    background: rgba(98, 48, 113, 0.94);
+    border: 5px solid #47105447;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgb(93, 20, 130);
+    color: #fff;
+}
+
+
+
+
+/* -------------------- Repeating Faded Text Overlay (Layer 2) -------------------- */
+
+/* This uses the ::after pseudo-element to create the repeating, faded "I Love You" pattern over the background image. */
+/* -------------------- Repeating Faded Text Overlay (Layer 2) -------------------- */
+/* Adjusted font, font size, and preserved increased visibility */
+#fifth::after {
+    /* Keep existing layout and positioning */
+    content: "I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love YouI Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love YouI Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love YouI Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love YouI Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You I Love You";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    
+    /* Font appearance and fade UPDATES */
+    font-family: 'Sacramento', cursive; /* NEW: Elegant and formal cursive font */
+    font-size: 3vw; /* REDUCED: Much smaller for subtle repetition */
+    line-height: 1.2; /* Tightened line height */
+    word-break: break-word; 
+    
+    /* Faded appearance */
+    color: rgba(255, 255, 255, 0.10); 
+    opacity: 0.9; /* Slightly less opaque for a softer background texture */
+    
+    /* Layout properties (unchanged) */
+    white-space: pre-wrap;
+    display: flex; 
+    flex-wrap: wrap;
+    justify-content: space-around; 
+    align-content: space-around; 
+    
+    z-index: 2; 
+    pointer-events: none; 
+    transform: rotate(-5deg); 
+}
+
+
+/* -------------------- Letter Content Box (Layer 3) -------------------- */
+#fifth .letter-content {
+    /* CRITICAL FIX 1: Increased size */
+    max-width: 800px; /* Increased from 600px to allow it to be larger */
+    width: 90%; 
+    padding: 50px 80px; /* Increased padding for more inner space */
+    
+    /* CRITICAL FIX 2: Updated Cream/Transparent Background */
+    /* Use a cream color (e.g., #fcf7f3 from your calendar card) with an alpha channel */
+    background: rgb(39, 17, 54); /* Cream color (#fcf7f3) with 90% opacity (0.9) */
+    
+    /* Soft border blending the two colors */
+    border: 2px solid #f9f5ff; 
+    border-radius: 12px;
+    box-shadow: 0 0 25px rgba(55, 30, 78, 0.816);
+    
+    z-index: 3; 
+    position: relative;
+    animation: fadeIn 1s ease-out; 
+}
+
+/* Heading */
+#fifth .letter-content h2 {
+    color: #ffffff;
+    font-size: 2.4rem;
+    margin-bottom: 20px;
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+}
+
+
+/* Paragraph */
+#fifth .letter-content p {
+    font-size: 1.3rem;
+    color: #c1bdff;
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+/* Next button */
+#fifth .next-btn {
+    background: #fbc1f7;
+    color: #1A164D;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: transform 0.2s, background 0.3s;
+    font-family: 'Cursive', sans-serif;
+    letter-spacing: 0.5px;
+}
+
+#fifth .next-btn:hover {
+    transform: scale(1.05);
+    background: #ffffff;
+}
+
+/* -------------------- ANIMATION -------------------- */
+@keyframes fadeIn {
+    0% { opacity: 0; transform: translateY(-20px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+
+/* ------------------ SIXTH PAGE (The Proposal Game) ------------------ */
+
+/* ------------------ SIXTH PAGE (The Proposal Game - Reimagined) ------------------ */
+
+#sixth {
+    position: fixed; 
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    
+    /* 1. Set the background color */
+    background-color: #fdd1ff; 
+    
+    /* 2. Set the transparent background image on top of the color */
+    /* *** Make sure to double-check this file path! *** */
+    background-image: url('background_letter_images/bg_proposal_image1.jpg'); 
+    
+    background-size: cover;      /* Image covers the whole screen */
+    background-position: center center; /* Image is centered */
+    background-repeat: no-repeat; /* Image does not repeat */
+        
+    /* Optional: Add a subtle blur to soften the background */
+    /* filter: blur(0.5px); */ 
+
+    display: none; 
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    z-index: 1003; 
+    overflow: hidden; 
+}
+
+#sixth.active {
+    display: flex;
+}
+
+#proposal-heading {
+    /* Position the heading where the box used to be */
+    position: absolute;
+    top: 15%; 
+    left: 50%;
+    transform: translateX(-50%);
+    
+    /* Font and Color UPDATES */
+    font-family: 'Playfair Display', serif; /* ELEGANT SERIF FONT */
+    font-size: clamp(2rem, 5vw, 4rem); 
+    color: #fdd1ff; /* Dark Pink Text Color */
+    
+    /* Background for readability (a subtle highlight behind the text) */
+    background: rgba(98, 48, 113, 0.944); 
+    padding: 15px 30px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgb(238, 168, 254);
+    
+    text-align: center;
+    width: 80%;
+    max-width: 600px;
+    z-index: 5;
+}
+
+/* --- FULL PAGE BUTTON AREA --- */
+
+#button-area {
+    /* Critical: Container for absolute buttons, covering the whole page */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* --- Proposal Button Styling (UPDATED for Uniform Size) --- */
+/* --- Proposal Button Styling (UPDATED for Fonts) --- */
+.proposal-btn {
+    /* Critical: Set a fixed size for both buttons */
+    width: 150px;
+    height: 70px;
+    font-size: 32px; 
+
+    /* Font UPDATES */
+    font-family: 'Cinzel', serif; /* USE CINZEL for Buttons */
+    font-weight: 700; /* Bold weight for impact */
+
+    /* Keep generic styles */
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    
+    /* Positioning and alignment styles maintained */
+    position: absolute; 
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+/* YES Button Styling (Soft, Romantic Pink) */
+#yes-btn {
+    /* 1. INCREASED THIS VALUE to push the buttons very low on the page */
+    top: 85vh; 
+    
+    /* 2. Positioned to the LEFT of center (side-by-side logic maintained) */
+    left: calc(50% - 15px - 75px); 
+    
+    /* 3. Center vertically relative to its position */
+    transform: translateY(-50%); 
+
+    background-color: rgba(98, 48, 113, 0.944); 
+    color: #fdd1ff; 
+    box-shadow: 0 5px 15px rgb(238, 168, 254);
+    z-index: 15; 
+}
+
+#yes-btn:hover {
+    background-color: #e9baff; 
+    transform: translateY(-50%) scale(1.08); 
+}
+
+/* NO Button Styling (The Revolving Button) */
+#no-btn {
+    /* 1. Positioned at the same new vertical line as YES */
+    top: 85vh; 
+    
+    /* 2. Positioned to the RIGHT of center (side-by-side logic maintained) */
+    left: calc(50% + 15px + 75px); 
+    
+    /* 3. Center vertically relative to its position */
+    transform: translateY(-50%);
+    
+    background-color: rgba(98, 48, 113, 0.944); 
+    color: #fdd1ff;
+    box-shadow: 0 5px 15px rgb(238, 168, 254);
+
+    /* Very fast transition for the movement illusion */
+    transition: all 0.01s linear; 
+}
+
+
+/* --- YES BUTTON CELEBRATION ANIMATION (Keyframes adjusted to only use translateY) --- */
+@keyframes heartPulse {
+    /* Update transforms to include the necessary translateY(-50%) for vertical centering */
+    0% { transform: translateY(-50%) scale(1); }
+    50% { transform: translateY(-50%) scale(1.2); box-shadow: 0 0 40px #ff69b4, 0 0 70px #ffc0cb; }
+    100% { transform: translateY(-50%) scale(1); }
+}
+
+.pulsing-yes {
+    /* Apply the animation directly, and let the keyframes manage the transform */
+    animation: heartPulse 0.5s infinite alternate; 
+}
+/* ------- Final Message Styling ------- */
+.final-message-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 50px;
+    transition: all 0.8s ease-out;
+    text-align: center;
+
+    /* Re-introduce the box styling for the final message ONLY */
+    background: rgba(98, 48, 113, 0.944);
+    border: 5px solid #47105447;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgb(93, 20, 130);
+    z-index: 6; /* Ensures it covers the heading and button */
+}
+
+.final-message-container h1 {
+    color: #ffffff;
+    font-size: clamp(2rem, 6vw, 4rem);
+}
+.final-message-container p {
+    font-size: clamp(1rem, 2.5vw, 1.5rem);
+    color: #ffffff;
+    font-family: 'Cursive', sans-serif;
+    margin-top: 20px;
+}
+
+/* ------------------ OPEN STATE ------------------ */
+
+.envelope-container.is-open #topFlap {
+    transform: rotateX(-150deg); 
+    z-index: 101; 
+}
+
+.envelope-container.is-open #bottomFlap {
+    transform: rotateX(150deg);
+    z-index: 101; 
+}
+
+.envelope-container.is-open .seal {
+    display: none;
+}
+
+.envelope-container.is-open .envelope {
+    opacity: 0;
+    visibility: hidden;
+    transition: transform 1s ease-in-out, opacity 0.1s 1.2s, visibility 0s 1.2s; 
+}
+
+.envelope-container.is-open .website-content {
+    opacity: 1 !important;
+    visibility: visible !important; 
+    z-index: 99; 
+}

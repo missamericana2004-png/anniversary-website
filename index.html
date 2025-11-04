@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animated Floral Envelope Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/tone@14.8.49/build/Tone.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cursive:wght@400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+
+        /* Video styling for polaroids */
+        .polaroid-back video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="envelope-container">
+
+    <!-- ENVELOPE -->
+    <div class="envelope">
+        <div class="body"></div>
+        <div class="flap" id="topFlap"></div>
+        <div class="bottom-flap" id="bottomFlap"></div>
+        <button class="seal" id="openEnvelope" aria-label="Open the envelope">
+            <div class="heart-icon"></div>
+        </button>
+    </div>
+
+    <!-- WEBSITE CONTENT -->
+    <div class="website-content">
+
+        <!-- HOME PAGE -->
+        <div id="home" class="page-section active">
+            <div class="calendar-card">
+    <h2 class="calendar-month">November 2024</h2>
+    <table aria-label="November 2024 Calendar">
+        <thead>
+            <tr>
+                <th>Sun</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="empty-day"></td>
+                <td class="empty-day"></td>
+                <td class="empty-day"></td>
+                <td class="empty-day"></td>
+                <td class="empty-day"></td>
+                <td>1</td>
+                <td>2</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>4</td>
+                <td class="special-day">&#x2764;</td> <!-- Heart moved here (Nov 5) -->
+                <td>6</td>
+                <td>7</td>
+                <td>8</td>
+                <td>9</td>
+            </tr>
+            <tr><td>10</td><td>11</td><td>12</td><td>13</td><td>14</td><td>15</td><td>16</td></tr>
+            <tr><td>17</td><td>18</td><td>19</td><td>20</td><td>21</td><td>22</td><td>23</td></tr>
+            <tr><td>24</td><td>25</td><td>26</td><td>27</td><td>28</td><td>29</td><td>30</td></tr>
+        </tbody>
+    </table>
+    <p class="calendar-caption">To forever bound by love and memories ∞♡</p>
+</div>
+
+
+            <div class="additional-info">
+                <h3 class="secondary-title">A right swipe, a random chat, and now a love story that even Netflix would envy🤪</h3>
+                <p>5th of November, the night it all started. A random late-night video call, a silly little confession that maybe (just maybe) I do like you… and somehow, here we are, two years later. Hopefully this is just the beginning of it all, because everything just makes sense with you, the dumb arguments, the endless laughter, and all the little moments in between (chaos, bad jokes, and way too many inside memes). </p>
+                <p>This day kinda feels like the start of our forever, wild, right? Who knew we’d end up here after everything? Thank you for being my biggest hype-person, my safe place, and honestly, the funniest human I know (jk).</p>
+                <p>I love you more than I can ever properly say (and definitely more than cheesecake).</p>
+                <p class="signature">Y̶o̶u̶r̶'s̶   Abhir's, Lovebug 🎀</p>
+            </div>
+
+            <!-- Heart Button -->
+            <a href="#second" class="heart-btn" title="I Love You">&#x2764;</a>
+        </div>
+
+        <!-- SECOND PAGE -->
+        <div id="second" class="page-section">
+            <h2></h2>
+            <p></p>
+            <button class="second-heart heart-btn" aria-label="I love you">
+    ❤
+    <div class="second-heart-text">I love you</div>
+</button>
+
+        </div>
+
+        <!-- THIRD LAVENDER PAGE -->
+        <div id="third" class="page-section">
+            <p class="highlight-text">
+            Ready to revisit our happiest times and make new ones along the way?
+            </p>
+
+            <div class="polaroid-container">
+                <!-- FIRST ROW: 3 IMAGES -->
+                <div class="polaroid">
+                    <div class="polaroid-inner">
+                        <div class="polaroid-front">We’ve walked through so much together, and I wouldn’t change a single step ❤</div>
+                        <div class="polaroid-back">
+                            <img src="images1\photo 1.jpg" alt="Image 1">
+                        </div>
+                    </div>
+                </div>
+                <div class="polaroid">
+                    <div class="polaroid-inner">
+                        <div class="polaroid-front">Didn’t know one random day would turn into the start of everything 🥹</div>
+                        <div class="polaroid-back">
+                            <img src="images1\photo 2.jpg" alt="Image 2">
+                        </div>
+                    </div>
+                </div>
+                <div class="polaroid">
+                    <div class="polaroid-inner">
+                        <div class="polaroid-front">Falling for you… over and over… endlessly💌</div>
+                        <div class="polaroid-back">
+                            <img src="images1\photo 3.jpg" alt="Image 3">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SECOND ROW: 3 VIDEOS -->
+                <div class="polaroid">
+                    <div class="polaroid-inner">
+                        <div class="polaroid-front">Just us, tucked under the mountains, where everything feels calm and right 🏔</div>
+                        <div class="polaroid-back">
+                            <img src="images1\photo 4.jpg" alt="Image 4">
+                        </div>
+                    </div>
+                </div>
+                <div class="polaroid">
+                    <div class="polaroid-inner">
+                        <div class="polaroid-front">So in love it feels like the world slows down a little when you’re around.😳</div>
+                        <div class="polaroid-back">
+                            <img src="images1\photo 5.jpg" alt="Image 5">
+                        </div>
+                    </div>
+                </div>
+                <div class="polaroid">
+                    <div class="polaroid-inner">
+                        <div class="polaroid-front">Look who’s stealing my heart again and again💕</div>
+                        <div class="polaroid-back">
+                            <img src="images1\photo 6.jpg" alt="Image 6">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+                <!-- NEXT PAGE BUTTON -->
+                <!-- END SECTION WITH LINE AND BUTTON -->
+                <!-- NEXT PAGE SECTION -->
+                <div class="next-page-section">
+                    <p class="next-page-text">Let’s see what’s next, my love 📖💓</p>
+                    <div class="next-page-btn-container">
+                        <button class="next-page-btn" id="third-next-btn">Click me, baby 💌</button>
+                    </div>
+                </div>
+        </div>
+
+        <!-- FOURTH PAGE: Memory Game of Dates -->
+        <div id="fourth" class="page-section">
+            <h2 style="color:#e7d3ff; font-family: 'Playfair Display', serif;">Taking a slow stroll through memory lane, feels like yesterday 🌸</h2>
+            <p style="font-family:'Dancing Script', cursive; color:#f8aeff;">Every photo holds a piece of our story, remember these moments?</p>
+
+            <div class="polaroid-container">
+                <!-- Row 1 -->
+                <div class="polaroid">
+                    <div class="polaroid-inner">
+                        <div class="polaroid-front">
+                            <img src="images2\photo 1.jpg" alt="Date 1">
+                        </div>
+                        <div class="polaroid-back">
+                            <img src="images2\photo 1-1.jpg" alt="Small Image 1" class="memory-img">
+                            <p class="polaroid-text">"Somehow convinced you to wear a tiara in CP — and honestly, you’ve never looked cuter 🎀❤️"</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="polaroid">
+                    <div class="polaroid-inner">
+                        <div class="polaroid-front">
+                            <img src="images2\photo 2.jpg" alt="Date 2">
+                        </div>
+                        <div class="polaroid-back">
+                            <img src="images2\photo 2-2.jpg" alt="Small Image 2" class="memory-img">
+                            <p class="polaroid-text">"Dropped you off for your big boy job, guess someone’s flying higher than my patience now 😜✈️ ”</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="polaroid">
+                    <div class="polaroid-inner">
+                        <div class="polaroid-front">
+                            <img src="images2\photo 3.jpg" alt="Date 3">
+                        </div>
+                        <div class="polaroid-back">
+                            <img src="images2\photo 3-3.jpg" alt="Small Image 3" class="memory-img">
+                            <p class="polaroid-text">"Up on your shoulders, living my main character moment 🤭✨"</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Row 2 -->
+                <div class="polaroid">
+                    <div class="polaroid-inner">
+                        <div class="polaroid-front">
+                            <img src="images2\photo 4.jpg" alt="Date 4">
+                        </div>
+                        <div class="polaroid-back">
+                            <img src="images2\photo 4-4.jpg" alt="Small Image 4" class="memory-img">
+                            <p class="polaroid-text">"In your arms, laughing like a maniac, feeling so loved — I think that’s what happiness really looks like 💕🫂"</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="polaroid">
+                    <div class="polaroid-inner">
+                        <div class="polaroid-front">
+                            <img src="images2\photo 5.jpg" alt="Date 5">
+                        </div>
+                        <div class="polaroid-back">
+                            <img src="images2\photo 5-5.jpg" alt="Small Image 5" class="memory-img">
+                            <p class="polaroid-text">"Pedaling side by side on our little cycling date, wind in our hair, laughter in the air, and hearts completely at ease 💫🚲"</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="polaroid">
+                    <div class="polaroid-inner">
+                        <div class="polaroid-front">
+                            <img src="images2\photo 6.jpg" alt="Date 6">
+                        </div>
+                        <div class="polaroid-back">
+                            <img src="images2\photo 6-6.jpg" alt="Small Image 6" class="memory-img">
+                            <p class="polaroid-text">"You sleeping on my shoulder like a baby, honestly, my heart couldn’t handle how cute that was 😭💫"</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Row 3 -->
+                <div class="polaroid">
+                    <div class="polaroid-inner">
+                        <div class="polaroid-front">
+                            <img src="images2\photo 7.jpg" alt="Date 7">
+                        </div>
+                        <div class="polaroid-back">
+                            <img src="images2\photo 7-7.jpg" alt="Small Image 7" class="memory-img">
+                            <p class="polaroid-text">"Somewhere between bad dance moves and loud music, we made the best memories 💫🕺"</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="polaroid">
+                    <div class="polaroid-inner">
+                        <div class="polaroid-front">
+                            <img src="images2\photo 8.jpg" alt="Date 8">
+                        </div>
+                        <div class="polaroid-back">
+                            <img src="images2\photo 8-8.jpg" alt="Small Image 8" class="memory-img">
+                            <p class="polaroid-text">"In the mountains, on my birthday, being carried in your arms, honestly felt like a movie scene (straight out of YJHD) 💕🏔️"</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="polaroid">
+                    <div class="polaroid-inner">
+                        <div class="polaroid-front">
+                            <img src="images2\photo 9.jpg" alt="Date 9">
+                        </div>
+                        <div class="polaroid-back">
+                            <img src="images2\photo 9-9.jpg" alt="Small Image 9" class="memory-img">
+                            <p class="polaroid-text">"Your birthday, my favorite excuse to remind you that you’re the best thing that’s ever happened to me 💫🎂"</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--button to letter page-->
+            <div class="next-page-section">
+                <p class="next-page-caption">Something from my heart, just for you ❤</p>
+                <button id="to-letter-btn" class="envelope-btn">
+                    <span class="envelope-icon">✉</span>
+                    <span class="envelope-text">A Letter for You, Baby 💌</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- LETTER PAGE -->
+        <section id="fifth" class="page-section letter-page">
+            <div class="letter-content">
+                <h2>My Forever Beginning ❤</h2>
+                <p>
+                From the moment we met, every laugh, every walk hand in hand, and every little glance 
+                has become a memory I never want to forget.  
+                You’re the warmth to my days and the calm to my chaos.  
+                So here’s my little question, sealed with love... 💌
+                </p>
+                <button id="to-final-btn" class="next-btn">Open the next surprise →</button>
+            </div>
+        </section>
+
+
+        <!-- DATE PROPOSAL PAGE -->
+        <section id="sixth" class="page-section proposal-page">
+            
+            <h1 id="proposal-heading">Would you be my date for today and forever?</h1>
+            
+            <button id="yes-btn" class="proposal-btn large-btn">
+                Yes
+            </button>
+
+            <div id="button-area">
+                <button id="no-btn" class="proposal-btn small-btn">
+                    No
+                </button>
+            </div>
+        </section>
+
+    </div> <!-- Close website-content -->
+</div> <!-- Close envelope-container -->
+
+<script src="script.js"></script>
+</body>
+</html>
